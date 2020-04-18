@@ -8,11 +8,11 @@ module.exports.run = (client, message, args) => {
     message.channel.send(embed) 
   }
   if(args[0] == 'missing' || args[0] == 'denied'){
-     let y = {}; 
-Object.entries(new Permissions(message.guild.members.cache.get(message.author.id).permissions).serialize()).filter(x => x[1] === false ? undefined : y[x] = x[1]).join("\n- ");
+    let y = {}
+Object.keys(message.member.permissions.serialize()).filter(x => x[1] === false).map(x => x).join("\n- ");
           let embed = new MessageEmbed()
         .setDescription(`\`\`\`diff\n- ${y}\`\`\``)
-        .setColor(`GREEN`)
+        .setColor(`RED`)
         .setAuthor(`${message.author.tag}'s missing permissions`, message.author.displayAvatarURL())
     message.channel.send(embed) 
   }

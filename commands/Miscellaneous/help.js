@@ -21,7 +21,7 @@ module.exports.run = (client, message, args) => {
     if (!args[0]) {
         const categories = readdirSync("./commands/")
 
-        embed.setDescription(`Any bug/suggestion must be reported here: [[Support Server]](https://discord.gg/2WQE6Qj)\nWonder why there is a moderation command in the category Administrator?\nWell Administrator cmds require more permissions`)
+        embed.setDescription(`Any bug/suggestion must be reported here: [Support Server](https://discord.gg/2WQE6Qj)\nOur Open Source code: [Github](https://github.com/infinitycoding222/vision-v2/tree/glitch) `)
         embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, client.user.displayAvatarURL());
 
         categories.forEach(category => {

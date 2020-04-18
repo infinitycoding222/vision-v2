@@ -7,7 +7,7 @@ app.listen(process.env.PORT);
 const { token, prefix } = require("./config")
 const { Client, Collection, MessageEmbed } = require("discord.js")
 const db = require('quick.db');
-const m = require('moment')
+const moment = require('moment')
 
 const client = new Client({
     disableEveryone: true
@@ -22,8 +22,7 @@ const fetch = require("node-fetch");
 
 const body = {
   users: client.users.cache.size, // <client>.users.size
-  servers: client.users.cache.size, // <client>.guilds.size 
-  shards: client.shard.count // <client>.shard.count
+  servers: client.users.cache.size
 };
 
 fetch("https://abstractlist.com/api/bots/694214787227451492/stats", {
@@ -53,7 +52,7 @@ client.on("guildMemberAdd", member => {
     member.roles.add(role)
     text = text.replace("{user}", member.user.tag)
                .replace("{membercount}", member.guild.memberCount)
-               .replace("{created}", m.utc(member.user.createdAt).format('LLL'))   
+               .replace("{created}", moment.utc(member.user.createdAt).format('LLL'))   
      m.send(new MessageEmbed().setColor('GREEN').setDescription(text).setTimestamp().setThumbnail(member.user.displayAvatarURL()))
 });
 client.on("guildMemberRemove", member => {
@@ -62,7 +61,7 @@ client.on("guildMemberRemove", member => {
         if(text == null) return;
     text = text.replace("{user}", member.user.tag)
                .replace("{membercount}", member.guild.memberCount)
-               .replace("{joined}", m.utc(member.joined).format('LLL'))   
+               .replace("{joined}", moment.utc(member.joined).format('LLL'))   
     let m2 = client.channels.cache.get(ch2annel)
         if(m2 == null) return;
   m2.send(new MessageEmbed().setColor('RED').setDescription(text).setTimestamp().setThumbnail(member.user.displayAvatarURL()))
